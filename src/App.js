@@ -20,12 +20,16 @@ function App() {
 		// add the given item to the cart
 		setCart([...cart, item])
 	};
-
+	function removeItem(id){
+		const newItems = cart.filter( item => item.id !== id )
+		setCart(newItems)
+	}
 	const productsContextObject = {
 			products: products,
 			cart: cart,
 			setCart: setCart,
-			addItem : addItem
+			addItem : addItem,
+			removeItem: removeItem
 		}
 
 	return (
@@ -39,16 +43,13 @@ function App() {
 						exact
 						path="/"
 						render={() => (
-							<Products
-								products={products}
-								addItem={addItem}
-							/>
+							<Products />
 						)}
 					/>
 
 					<Route
 						path="/cart"
-						render={() => <ShoppingCart cart={cart} />}
+						render={() => <ShoppingCart />}
 					/>
 				</div>
 			</CartContext.Provider>
