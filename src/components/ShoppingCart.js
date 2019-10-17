@@ -6,7 +6,19 @@ import Item from './ShoppingCartItem';
 
 const ShoppingCart = () => {
 	const { cart, removeItem } = useContext(CartContext)
+	useEffect(()=>{
+		// setLocalStorageItems()
+		// getLocalStorageItem()
+	}, [cart])
 
+
+	function setLocalStorageItems (){
+		window.localStorage.setItem('Cart Items', JSON.stringify(cart));
+	}
+	function getLocalStorageItem (){
+		return JSON.parse(window.localStorage.getItem('Cart Items'));
+	}
+	console.log(getLocalStorageItem())
 	const getCartTotal = () => {
 		return cart.reduce((acc, value) => {
 			return acc + value.price;

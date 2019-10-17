@@ -15,14 +15,22 @@ function App() {
 	const [cart, setCart] = useState([]);
 
 
-	useEffect(()=>{}, [cart])
+	useEffect(()=>{ 
+		setLocalStorageItems() 
+	}, [cart])
+
 	const addItem = item => {
-		// add the given item to the cart
 		setCart([...cart, item])
-	};
+		setLocalStorageItems([...cart, item]) 
+	}
+
 	function removeItem(id){
 		const newItems = cart.filter( item => item.id !== id )
 		setCart(newItems)
+	}
+	function setLocalStorageItems (cartItem){
+		console.log(cartItem)
+		cartItem &&	window.localStorage.setItem('Cart Items', JSON.stringify(cartItem));
 	}
 	const productsContextObject = {
 			products: products,
